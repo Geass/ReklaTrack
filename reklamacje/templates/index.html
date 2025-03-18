@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Reklamacji</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2> Lista reklamacji</h2>
+        <a href="{{ url_for('dodaj') }}" class="button">➕ Dodaj nową reklamację</a>
+        <a href="{{ url_for('export') }}" class="button export">📥 Eksportuj do Excela</a>
+
+        {% for r in reklamacje %}
+            <div class="reklamacja-card">
+                <h3>{{ r.tytul }}</h3>
+                <p><strong>Status:</strong> <span class="status">{{ r.status }}</span></p>
+                <p><strong>Numer zamówienia:</strong> {{ r.numer or '—' }}</p>
+                <p><strong>Indeksy produktów:</strong>
+                    {% if r.lista_indeksow() %}
+                        {{ r.lista_indeksow() | join(', ') }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </p>
+                <p><strong>Opis:</strong> {{ r.opis or 'Brak opisu.' }}</p>
+                <p><strong>Data zgłoszenia:</strong> {{ r.data_utworzenia.strftime('%Y-%m-%d %H:%M') }}</p>
+
+                <div class="actions">
+                    <a href="{{ url_for('podglad', id=r.id) }}">🔍 Podejrzyj</a> |
+                    <a href="{{ url_for('edytuj', id=r.id) }}">✏️ Edytuj</a> |
+                    <a href="{{ url_for('usun', id=r.id) }}">🗑️ Usuń</a> |
+                    <a href="{{ url_for('usun_trwale', id=r.id) }}" onclick="return confirm('Usunąć trwale?')">⚠️ Usuń trwale</a>
+                    <br>
+                    🔄 Status: 
+                    <a href="{{ url_for('zmien_status', id=r.id, status='W oczekiwaniu') }}">⏳ W oczekiwaniu</a> |
+                    <a href="{{ url_for('zmien_status', id=r.id, status='W trakcie') }}">🔄 W trakcie</a> |
+                    <a href="{{ url_for('zmien_status', id=r.id, status='Zrealizowana') }}">✅ Zrealizowana</a> |
+                    <a href="{{ url_for('zmien_status', id=r.id, status='Odrzucona') }}">❌ Odrzucona</a>
+                </div>
+            </div>
+        {% else %}
+            <p>Brak reklamacji w systemie.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

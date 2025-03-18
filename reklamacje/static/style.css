@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    background-color: #fff;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    border-radius: 8px;
+}
+
+input[type=text], textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+.reklamacja-card {
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.reklamacja-card h3 {
+    margin-top: 0;
+}
+
+.status {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+.actions {
+    margin-top: 10px;
+}
+
+.actions a {
+    margin-right: 5px;
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.button.export {
+    background-color: #17a2b8;
+}
+
+.edit {
+    color: #ffc107;
+}
+
+.delete {
+    color: #dc3545;
+}
+
+.edit:hover, .delete:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Edycja Reklamacji</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function dodajPole(divID, name, wartosc=''){
+            const div = document.createElement('div');
+            div.innerHTML = `<input type="text" name="${name}[]" value="${wartosc}" placeholder="${name}">`;
+            document.getElementById(divID).appendChild(div);
+        }
+        window.onload = function(){
+            const indeksy = {{reklamacja.lista_indeksow()|tojson}};
+            const fedex = {{reklamacja.lista_fedex()|tojson}};
+            indeksy.forEach(i => dodajPole('indeksy','indeks',i));
+            fedex.forEach(f => dodajPole('fedex','fedex',f));
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>✏️ Edytuj reklamację</h2>
+    <form method="POST">
+        <input type="text" name="tytul" value="{{reklamacja.tytul}}" required>
+        <input type="text" name="numer" value="{{reklamacja.numer}}">
+        <textarea name="opis">{{reklamacja.opis}}</textarea>
+
+        <input type="text" name="klient_imie" value="{{reklamacja.klient_imie}}" placeholder="Imię klienta">
+        <input type="text" name="klient_nazwisko" value="{{reklamacja.klient_nazwisko}}" placeholder="Nazwisko klienta">
+        <input type="text" name="klient_telefon" value="{{reklamacja.klient_telefon}}" placeholder="Telefon klienta">
+        <input type="email" name="klient_email" value="{{reklamacja.klient_email}}" placeholder="Email klienta">
+
+        <select name="status">
+        {% for s in ['W oczekiwaniu', 'W trakcie', 'Zrealizowana', 'Odrzucona'] %}
+            <option value="{{s}}" {% if reklamacja.status == s %}selected{% endif %}>{{s}}</option>
+        {% endfor %}
+        </select>
+
+        <div id="indeksy"></div>
+        <button type="button" onclick="dodajPole('indeksy','indeks')">➕ Indeks</button>
+
+        <div id="fedex"></div>
+        <button type="button" onclick="dodajPole('fedex','fedex')">➕ FedEx</button>
+
+        <textarea name="notatki">{{reklamacja.notatki}}</textarea>
+        <button type="submit">✅ Zapisz</button>
+    </form>
+    <br><a href="{{url_for('index')}}">⬅️ Powrót</a>
+</div>
+</body>
+</html>

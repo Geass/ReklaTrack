@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Podgląd Reklamacji</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h2>🔎 Podgląd reklamacji</h2>
+    <strong>Tytuł:</strong> {{ reklamacja.tytul }}<br>
+    <strong>Status:</strong> {{ reklamacja.status }}<br>
+    <strong>Numer zamówienia:</strong> {{ reklamacja.numer or "—" }}<br>
+    <strong>Data utworzenia:</strong> {{ reklamacja.data_utworzenia.strftime('%Y-%m-%d %H:%M') }}<br>
+    <strong>Data realizacji:</strong> {{ reklamacja.data_realizacji.strftime('%Y-%m-%d %H:%M') if reklamacja.data_realizacji else "—" }}<br>
+
+    <h3>Opis reklamacji</h3>
+    <p>{{ reklamacja.opis or "Brak opisu." }}</p>
+
+    <h3>Dane klienta</h3>
+    <ul>
+        <li><strong>Imię:</strong> {{ reklamacja.klient_imie }}</li>
+        <li><strong>Nazwisko:</strong> {{ reklamacja.klient_nazwisko }}</li>
+        <li><strong>Telefon:</strong> {{ reklamacja.klient_telefon }}</li>
+        <li><strong>Email:</strong> {{ reklamacja.klient_email }}</li>
+    </ul>
+
+    <strong>Indeksy produktów:</strong>
+    {% if reklamacja.lista_indeksow() %}
+        {{ reklamacja.lista_indeksow()|join(', ') }}
+    {% else %}
+        —
+    {% endif %}<br>
+
+    <strong>Numery FedEx:</strong>
+    {% if reklamacja.lista_fedex() %}
+        {{ reklamacja.lista_fedex()|join(', ') }}
+    {% else %}
+        —
+    {% endif %}<br>
+
+    <strong>Opis:</strong> {{ reklamacja.opis or 'Brak opisu.' }}<br>
+    
+    <strong>Notatki:</strong> {{ reklamacja.notatki or "Brak" }}
+
+    <br><br>
+    <a href="{{ url_for('index') }}">⬅️ Powrót do listy</a>
+</div>
+</body>
+</html>

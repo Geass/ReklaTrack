@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Reklamację</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function dodajPole(divID, name){
+            const div = document.createElement('div');
+            div.innerHTML = `<input type="text" name="${name}[]" placeholder="${name}">`;
+            document.getElementById(divID).appendChild(div);
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>➕ Dodaj nową reklamację</h2>
+    <form method="POST">
+        <input type="text" name="tytul" placeholder="Tytuł reklamacji" required>
+        <input type="text" name="numer" placeholder="Numer zamówienia">
+        <textarea name="opis" placeholder="Opis reklamacji"></textarea>
+
+        <h3>Dane klienta</h3>
+        <input type="text" name="klient_imie" placeholder="Imię klienta">
+        <input type="text" name="klient_nazwisko" placeholder="Nazwisko klienta">
+        <input type="text" name="klient_telefon" placeholder="Telefon klienta">
+        <input type="email" name="klient_email" placeholder="Email klienta">
+
+        <h3>Indeksy produktów</h3>
+        <div id="indeksy"><input type="text" name="indeks[]" placeholder="Indeks produktu"></div>
+        <button type="button" onclick="dodajPole('indeksy','indeks')">➕ Dodaj indeks</button>
+
+        <h3>Numery zgłoszeń FedEx</h3>
+        <div id="fedex"><input type="text" name="fedex[]" placeholder="Numer FedEx"></div>
+        <button type="button" onclick="dodajPole('fedex','fedex')">➕ Dodaj numer FedEx</button>
+
+        <h3>Notatki</h3>
+        <textarea name="notatki" placeholder="Notatki"></textarea>
+
+        <button type="submit">✅ Dodaj reklamację</button>
+    </form>
+    <br><a href
