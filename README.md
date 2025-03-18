@@ -58,8 +58,9 @@ pip install flask flask-sqlalchemy pandas openpyxl
 
 ---
 
-## **🖼️ Zrzuty ekranu (opcjonalne)**
-*(Dodaj screeny z aplikacji, np. lista reklamacji, formularz dodawania, eksport do Excela.)*
+## **🖼️ Zrzuty ekranu **
+![image](https://github.com/user-attachments/assets/6d4a3f43-4295-48f1-9538-36ef4e47dc7c)
+
 
 ---
 
