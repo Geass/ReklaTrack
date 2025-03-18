@@ -19,7 +19,7 @@
 
 ### **1️⃣ Klonowanie repozytorium**
 ```bash
-git clone https://github.com/TwojLogin/ReklaTrack.git
+git clone https://github.com/Geass/ReklaTrack.git
 cd ReklaTrack
 ```
 
