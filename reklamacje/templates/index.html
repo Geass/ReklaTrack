@@ -2,46 +2,66 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Lista Reklamacji</title>
+    <title>ReklaTrack - Reklamacje</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div class="container">
-        <h2> Lista reklamacji</h2>
-        <a href="{{ url_for('dodaj') }}" class="button">➕ Dodaj nową reklamację</a>
-        <a href="{{ url_for('export') }}" class="button export">📥 Eksportuj do Excela</a>
+<div class="container">
+    <h1>🚀 ReklaTrack</h1>
+    <h2>System Zarządzania Reklamacjami</h2>
 
+    <nav>
+        <a href="{{ url_for('dodaj') }}" class="button">➕ Nowa reklamacja</a>
+        <a href="{{ url_for('export') }}" class="button">📥 Eksportuj Excel</a>
+    </nav>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tytuł</th>
+                <th>Status</th>
+                <th>Zgłoszono</th>
+                <th>Zrealizowano</th>
+                <th>Opcje</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for r in reklamacje %}
-            <div class="reklamacja-card">
-                <h3>{{ r.tytul }}</h3>
-                <p><strong>Status:</strong> <span class="status">{{ r.status }}</span></p>
-                <p><strong>Numer zamówienia:</strong> {{ r.numer or '—' }}</p>
-                <p><strong>Indeksy produktów:</strong>
-                    {% if r.lista_indeksow() %}
-                        {{ r.lista_indeksow() | join(', ') }}
+            <tr>
+                <td>{{ r.id }}</td>
+                <td>{{ r.tytul }}</td>
+                <td>
+                    {% if r.status == 'Zrealizowana' %}
+                        ✅
+                    {% elif r.status == 'Odrzucona' %}
+                        ❌
+                    {% elif r.status == 'W trakcie' %}
+                        🔄
                     {% else %}
-                        —
+                        ⏳
                     {% endif %}
-                </p>
-                <p><strong>Opis:</strong> {{ r.opis or 'Brak opisu.' }}</p>
-                <p><strong>Data zgłoszenia:</strong> {{ r.data_utworzenia.strftime('%Y-%m-%d %H:%M') }}</p>
-
-                <div class="actions">
-                    <a href="{{ url_for('podglad', id=r.id) }}">🔍 Podejrzyj</a> |
-                    <a href="{{ url_for('edytuj', id=r.id) }}">✏️ Edytuj</a> |
-                    <a href="{{ url_for('usun', id=r.id) }}">🗑️ Usuń</a> |
-                    <a href="{{ url_for('usun_trwale', id=r.id) }}" onclick="return confirm('Usunąć trwale?')">⚠️ Usuń trwale</a>
-                    <br>
-                    🔄 Status: 
-                    <a href="{{ url_for('zmien_status', id=r.id, status='W oczekiwaniu') }}">⏳ W oczekiwaniu</a> |
-                    <a href="{{ url_for('zmien_status', id=r.id, status='W trakcie') }}">🔄 W trakcie</a> |
-                    <a href="{{ url_for('zmien_status', id=r.id, status='Zrealizowana') }}">✅ Zrealizowana</a> |
-                    <a href="{{ url_for('zmien_status', id=r.id, status='Odrzucona') }}">❌ Odrzucona</a>
-                </div>
-            </div>
-        {% else %}
-            <p>Brak reklamacji w systemie.</p>
+                    {{ r.status }}
+                </td>
+                <td>{{ r.data_utworzenia.strftime('%Y-%m-%d') }}</td>
+                <td>{{ r.data_realizacji.strftime('%Y-%m-%d') if r.data_realizacji else '—' }}</td>
+                <td>
+                    <a href="{{ url_for('podglad', id=r.id) }}">👁️</a>
+                    <a href="{{ url_for('edytuj', id=r.id) }}">✏️</a>
+                    <a href="{{ url_for('usun', id=r.id) }}">🗑️</a>
+                    <a href="{{ url_for('usun_trwale', id=r.id) }}" onclick="return confirm('Usunąć trwale?');">⚠️</a><br>
+                    <small>
+                        <a href="{{ url_for('zmien_status', id=r.id, status='W oczekiwaniu') }}">⏳</a>
+                        <a href="{{ url_for('zmien_status', id=r.id, status='W trakcie') }}">🔄</a>
+                        <a href="{{ url_for('zmien_status', id=r.id, status='Zrealizowana') }}">✅</a>
+                        <a href="{{ url_for('zmien_status', id=r.id, status='Odrzucona') }}">❌</a>
+                    </small>
+                </td>
+            </tr>
         {% endfor %}
-    </div>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
