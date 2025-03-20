@@ -12,6 +12,7 @@
     <h2>System Zarządzania Reklamacjami</h2>
 
     <nav>
+        <a href="{{ url_for('logout') }}" class="button" style="float:right;">🚪 Wyloguj</a>
         <a href="{{ url_for('dodaj') }}" class="button">➕ Nowa reklamacja</a>
         <a href="{{ url_for('export') }}" class="button">📥 Eksportuj Excel</a>
     </nav>
