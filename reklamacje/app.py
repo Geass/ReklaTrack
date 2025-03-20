@@ -1,8 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, request, send_file
+from flask import Flask, render_template, redirect, url_for, request, send_file, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, timedelta
 import pandas as pd
 import json
 
@@ -10,7 +10,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reklamacje.db'
 app.config['SECRET_KEY'] = 'Twoj_sekretny_klucz'
 
+# Ustawienie sesji na 3 minuty
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=3)
+
 db = SQLAlchemy(app)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -61,10 +65,12 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and check_password_hash(user.password, password):
             login_user(user)
+            session.permanent = True  # <-- Dodaj tę linię!
             return redirect(url_for('index'))
         else:
             return render_template('login.html', error='Błędne dane logowania')
     return render_template('login.html')
+
 
 @app.route('/logout')
 @login_required
