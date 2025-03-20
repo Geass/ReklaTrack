@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>ReklaTrack - Reklamacje</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <div class="container">
-    <h1>🚀 ReklaTrack</h1>
+    <h1>📦 ReklaTrack</h1>
     <h2>System Zarządzania Reklamacjami</h2>
 
     <nav>
         <a href="{{ url_for('logout') }}" class="button" style="float:right;">🚪 Wyloguj</a>
-        <a href="{{ url_for('dodaj') }}" class="button">➕ Nowa reklamacja</a>
-        <a href="{{ url_for('export') }}" class="button">📥 Eksportuj Excel</a>
+        <a href="{{ url_for('dodaj') }}" class="button">📁 Nowa reklamacja</a>
+        <a href="{{ url_for('export') }}" class="button">📑 Eksportuj Excel</a>
     </nav>
 
     <table>
@@ -66,4 +67,8 @@
     </table>
 </div>
 </body>
+
+<footer>  
+    © 2025 Szymon Zieniewicz - Licensed under the MIT License. – Kod jest wolny jak wiatr. Możesz go używać, modyfikować i dzielić się nim bez ograniczeń, zgodnie z zasadami licencji MIT.
+    Nie biorę jednak odpowiedzialności, jeśli Twój komputer ożyje i zacznie mówić.</footer>
 </html>

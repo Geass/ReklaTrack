@@ -6,6 +6,7 @@ body {
     color: #c5c8d1;
     margin: 0;
     padding: 0;
+
 }
 
 .container {
@@ -181,4 +182,125 @@ input[type=email]:focus,
 textarea:focus {
     outline: none;
     box-shadow: 0 0 8px rgba(103,83,244,0.7);
+}
+/* Responsywność na urządzenia mobilne */
+@media screen and (max-width: 768px) {
+    
+    .container {
+        width: 95%;
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        font-size: 12px;
+    }
+
+    table th, table td {
+        padding: 8px;
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=password],
+    textarea,
+    select {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    button[type=submit],
+    button[type=button],
+    .button {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    h1, h2, h4 {
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #bbb;
+}
+
+main {
+    flex: 1; /* Dzięki temu zawartość zajmie dostępne miejsce, a stopka będzie na dole */
+}
+/* Wyśrodkowanie okna logowania */
+/* Wyśrodkowanie całej strony */
+.login-container {
+    width: 100%;
+    height: 100vh; /* Pełna wysokość ekranu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Ustawienie elementów pionowo */
+}
+
+/* Nagłówek logowania */
+.login-container h2 {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 20px; /* Odsunięcie od formularza */
+    text-align: center;
+}
+
+/* Formularz logowania */
+
+
+/* Pola wejściowe */
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: #282a3a;
+    color: #ffffff;
+}
+
+/* Przycisk logowania */
+#moj-przycisk {
+    width: 105%;
+    padding: 10px;
+    background-color: #6753f4;
+    color: #ffffff;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #5340d4;
+    transform: translateY(-2px);
+}
+
+#moj-przycisk {
+    display: flex;
+    justify-content: center;  /* Wycentrowanie poziome */
+    align-items: center;  
 }

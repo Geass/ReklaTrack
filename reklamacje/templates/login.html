@@ -2,13 +2,13 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Logowanie – ReklaTrack</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<div class="container">
+<div class="login-container">
     <h2>🔐 Zaloguj się</h2>
     {% if error %}
         <p style="color: red;">{{ error }}</p>
@@ -16,8 +16,14 @@
     <form method="POST">
         <input type="text" name="username" placeholder="Nazwa użytkownika" required>
         <input type="password" name="password" placeholder="Hasło" required>
-        <button type="submit">Zaloguj się</button>
+        <button id="moj-przycisk" type="submit">Zaloguj się</button>
     </form>
 </div>
+
+<footer class="footer">  
+    © 2025 Szymon Zieniewicz - Licensed under the MIT License. – Kod jest wolny jak wiatr. Możesz go używać, modyfikować i dzielić się nim bez ograniczeń, zgodnie z zasadami licencji MIT.
+    Nie biorę jednak odpowiedzialności, jeśli Twój komputer ożyje i zacznie mówić.
+</footer>
+
 </body>
 </html>
