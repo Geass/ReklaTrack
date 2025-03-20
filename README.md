@@ -59,8 +59,8 @@ pip install flask flask-sqlalchemy pandas openpyxl
 ---
 
 ## **🖼️ Zrzuty ekranu **
-![image](https://github.com/user-attachments/assets/6d4a3f43-4295-48f1-9538-36ef4e47dc7c)
-![image](https://github.com/user-attachments/assets/90a00d77-c9bc-420d-9f60-d08d6e4a30eb)
+![image](https://github.com/user-attachments/assets/60f4655d-e991-408f-adef-c30640cbdca8)
+
 
 
 
